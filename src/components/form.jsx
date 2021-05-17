@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import Form from "react-bootstrap/Form";
-import { Button } from 'react-bootstrap';
-import Axios from 'axios';
+import React, { useState, useEffect } from 'react'
+import Form from "react-bootstrap/Form"
+import { Button } from 'react-bootstrap'
+import Axios from 'axios'
 
 function NFTForm() {
     const initialState = {
@@ -17,21 +17,21 @@ function NFTForm() {
         availability: "",
         date: ""
     }
-    const url = "http://localhost:3000/";
-    var formDate = new Date().toISOString().split("T")[0];
+    const url = "http://localhost:3000/"
+    var formDate = new Date().toISOString().split("T")[0]
     console.log(formDate)
-    const [validated, setValidated] = useState(false);
-    const [newForm, setForm] = useState(initialState);
+    const [validated, setValidated] = useState(false)
+    const [newForm, setForm] = useState(initialState)
 
 
     const handleSubmit = (event) => {
-        const form = event.currentTarget;
+        const form = event.currentTarget
         //console.log(newForm)
         if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
         }
-        setValidated(true);
+        setValidated(true)
         console.log(newForm)
         Axios.post(url, {
             category: newForm.category,
@@ -47,16 +47,16 @@ function NFTForm() {
             date: newForm.date
         }).then(
             res => {
-                console.log(res.data);
+                console.log(res.data)
             }
         )
-    };
+    }
 
-    useEffect(() => { }, [newForm]);
+    useEffect(() => { }, [newForm])
     const handleOnChange = (e) => {
-        const { name, value } = e.target;
+        const { name, value } = e.target
 
-        setForm({ ...newForm, [name]: value });
+        setForm({ ...newForm, [name]: value })
     }
 
     return (
