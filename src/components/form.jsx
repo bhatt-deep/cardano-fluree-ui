@@ -23,22 +23,20 @@ function NFTForm()  {
                     <Form.Group controlId="formCategory">
                         <Form.Label>Category</Form.Label>
                         <Form.Control
-                            placeholder="Enter Category"
-                            required
-                            type="text" />
+                            as="select"
+                            required>
+                                <option>Art</option>
+                                <option>Music</option>
+                                <option>Identity</option>
+                            </Form.Control>
+                            
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type="invalid">Please Enter Category </Form.Control.Feedback>
                     </Form.Group>
 
                     <Form.Group controlId="formImgURL">
-                        <Form.Label>Image URL</Form.Label>
-                        <Form.Control
-                            placeholder="Enter URL of Image"
-                            required
-                            type="URL"
-                        />
-                        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                        <Form.Control.Feedback type="invalid">Please Enter URL of Image </Form.Control.Feedback>
+                        <Form.Label>Image File</Form.Label>
+                        <Form.File id="formImgURL" required  />
                     </Form.Group>
 
                     <Form.Group controlId="formArtworkName">
@@ -62,9 +60,9 @@ function NFTForm()  {
 
                     <Form.Group controlId="formMaterials">
                         <Form.Label>Materials</Form.Label>
-                        <Form.Control placeholder="Enter Materials"
+                        <Form.Control as="textarea" rows={4}
                             required
-                            type="text" />
+                            type="textarea" />
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type="invalid">Please Enter Materials </Form.Control.Feedback>
                     </Form.Group>
@@ -98,9 +96,9 @@ function NFTForm()  {
 
                     <Form.Group controlId="formSignificance">
                         <Form.Label>Significance</Form.Label>
-                        <Form.Control placeholder="Enter Significance"
+                        <Form.Control as="textarea" rows={4}
                             required
-                            type="text" />
+                            type="textarea"  />
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type="invalid">Please Enter Significance </Form.Control.Feedback>
                     </Form.Group>
