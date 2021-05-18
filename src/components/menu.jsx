@@ -5,7 +5,7 @@ const menu = () => {
   return (
     <div>
       <Navbar bg="dark" variant="dark">
-        <Navbar.Brand href="#home">NFT Marketplace</Navbar.Brand>
+        <Navbar.Brand href="#home">Cardano NFT Marketplace</Navbar.Brand>
       </Navbar>
     </div>
   )

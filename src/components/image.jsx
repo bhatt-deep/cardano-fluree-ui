@@ -5,9 +5,9 @@ const image = () => {
   return (
     <div>
       <Image
-        src="./img/bg.jpg"
+        src="https://ipfs.io/ipfs/bafybeidzbb27oxdaht5eoxcghm6ynb2rtwwshvgkqsktw3trnrzrgvpdnq"
         fluid
-        style={{ border: 'none', height: 'auto' }}
+        style={{ border: 'none', height: 'auto'}}
       />
     </div>
   )
