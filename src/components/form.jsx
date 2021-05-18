@@ -1,31 +1,54 @@
 import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form'
-import { Button } from 'react-bootstrap'
+import { Button, Col, Image } from 'react-bootstrap'
 import Axios from 'axios'
 
 function NFTForm() {
-  const initialState = {
-    category: 'Art',
-    name: '',
-    artist: '',
-    imageUrl: '',
-    materials: '',
-    dimensions: '',
-    weight: '',
-    story: '',
-    significance: '',
-    availability: '',
-    date: '',
-  }
   const url = 'http://localhost:3001/'
   var formDate = new Date().toISOString().split('T')[0]
 
   const [validated, setValidated] = useState(false)
-  const [newForm, setForm] = useState(initialState)
+  const [newForm, setForm] = useState({
+    category      : '',
+    name          : '',
+    artist        : '',
+    weight        : '',
+    story         : '',
+    date          : '',
+    imageUrl      : '',
+    materials     : '',
+    dimensions    : '',
+    significance  : '',
+    availability  : ''
+    
+  })
+  const [selectedFile, setSelectedFile] = useState()
+  const [preview, setPreview] = useState()
+
+  useEffect(() => {
+    if (!selectedFile) {
+      setPreview(undefined)
+      return
+    }
+
+    const objectUrl = URL.createObjectURL(selectedFile)
+    console.log('objectUrl', objectUrl)
+    setPreview(objectUrl)
+
+    return () => URL.revokeObjectURL(objectUrl)
+  }, [selectedFile])
+
+  const onSelectFile = (e) => {
+    handleOnChange(e)
+    if (!e.target.files || e.target.files.length === 0) {
+      setSelectedFile(undefined)
+      return
+    }
+    setSelectedFile(e.target.files[0])
+  }
 
   const handleSubmit = async (event) => {
     const form = event.currentTarget
-    console.log(form)
 
     if (form.checkValidity() === false) {
       event.preventDefault()
@@ -54,6 +77,7 @@ function NFTForm() {
   useEffect(() => {}, [newForm])
 
   const handleOnChange = (e) => {
+    console.log(e)
     const { name, value } = e.target
     setForm({ ...newForm, [name]: value })
   }
@@ -63,7 +87,7 @@ function NFTForm() {
       <Form
         validated={validated}
         onSubmit={handleSubmit}
-        style={{ width: '70%', marginLeft: '15%', marginTop: '5%' }}
+        style={{ width: '70%', marginLeft: '15%', marginTop: '2%' }}
       >
         <Form.Group controlId="formCategory">
           <Form.Label>Category</Form.Label>
@@ -75,8 +99,8 @@ function NFTForm() {
             required
           >
             <option>Art</option>
-            <option disabled="true">Music</option>
-            <option disabled="true">Identity</option>
+            <option disabled>Music</option>
+            <option disabled>Identity</option>
           </Form.Control>
           <Form.Control.Feedback type="invalid">
             Please Enter Category{' '}
@@ -89,42 +113,102 @@ function NFTForm() {
             required
             name="imageUrl"
             value={newForm.imageUrl}
-            onChange={handleOnChange}
+            onChange={onSelectFile}
           />
+          {selectedFile && (
+            <Image
+              src={preview}
+              alt="uploaded img"
+              thumbnail
+              xs={6}
+              md={4}
+              style={{ border: 'none', maxWidth: '1000px', height: '300px' }}
+            />
+          )}
         </Form.Group>
-        <Form.Group controlId="formArtworkName">
-          <Form.Label>Artifact Name</Form.Label>
-          <Form.Control
-            placeholder="Name your artwork"
-            required
-            name="name"
-            value={newForm.name}
-            onChange={handleOnChange}
-            type="text"
-          />
-          <Form.Control.Feedback type="invalid">
-            Please Enter Artifact Name{' '}
-          </Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group controlId="formArtistName">
-          <Form.Label>Artist Name</Form.Label>
-          <Form.Control
-            placeholder="Enter Artist Name"
-            required
-            name="artist"
-            value={newForm.artist}
-            onChange={handleOnChange}
-            type="text"
-          />
-          <Form.Control.Feedback type="invalid">
-            Please Enter Artist Name{' '}
-          </Form.Control.Feedback>
-        </Form.Group>
+        <Form.Row>
+          <Form.Group as={Col} md="6" controlId="formArtworkName">
+            <Form.Label>Artifact Name</Form.Label>
+            <Form.Control
+              placeholder="Name your artwork"
+              required
+              name="name"
+              value={newForm.name}
+              onChange={handleOnChange}
+              type="text"
+            />
+            <Form.Control.Feedback type="invalid">
+              Please Enter Artifact Name{' '}
+            </Form.Control.Feedback>
+          </Form.Group>
+
+          <Form.Group as={Col} md="6" controlId="formArtistName">
+            <Form.Label>Artist Name</Form.Label>
+            <Form.Control
+              placeholder="Enter Artist Name"
+              required
+              name="artist"
+              value={newForm.artist}
+              onChange={handleOnChange}
+              type="text"
+            />
+            <Form.Control.Feedback type="invalid">
+              Please Enter Artist Name{' '}
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group as={Col} md="4" controlId="formDimensions">
+            <Form.Label>Dimensions</Form.Label>
+            <Form.Control
+              placeholder="Enter Dimensions"
+              required
+              name="dimensions"
+              value={newForm.dimensions}
+              onChange={handleOnChange}
+              type="text"
+            />
+            <Form.Control.Feedback type="invalid">
+              Please Enter Dimensions{' '}
+            </Form.Control.Feedback>
+          </Form.Group>
+
+          <Form.Group as={Col} md="4" controlId="formWeight">
+            <Form.Label>Weight</Form.Label>
+            <Form.Control
+              placeholder="Enter Weight"
+              required
+              name="weight"
+              value={newForm.weight}
+              onChange={handleOnChange}
+              type="text"
+            />
+
+            <Form.Control.Feedback type="invalid">
+              Please Enter Weight{' '}
+            </Form.Control.Feedback>
+          </Form.Group>
+
+          <Form.Group as={Col} md="4" controlId="formDate">
+            <Form.Label>Date Created</Form.Label>
+            <Form.Control
+              type="date"
+              name="date"
+              value={newForm.date}
+              onChange={handleOnChange}
+              max={formDate}
+              required
+            />
+            <Form.Control.Feedback type="invalid">
+              Please Enter valid Date{' '}
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Form.Row>
         <Form.Group controlId="formMaterials">
           <Form.Label>Materials</Form.Label>
           <Form.Control
             as="textarea"
-            rows={4}
+            rows={2}
             required
             name="materials"
             value={newForm.materials}
@@ -133,34 +217,6 @@ function NFTForm() {
           />
           <Form.Control.Feedback type="invalid">
             Please Enter Materials{' '}
-          </Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group controlId="formDimensions">
-          <Form.Label>Dimensions</Form.Label>
-          <Form.Control
-            placeholder="Enter Dimensions"
-            required
-            name="dimensions"
-            value={newForm.dimensions}
-            onChange={handleOnChange}
-            type="text"
-          />
-          <Form.Control.Feedback type="invalid">
-            Please Enter Dimensions{' '}
-          </Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group controlId="formWeight">
-          <Form.Label>Weight</Form.Label>
-          <Form.Control
-            placeholder="Enter Weight"
-            required
-            name="weight"
-            value={newForm.weight}
-            onChange={handleOnChange}
-            type="text"
-          />
-          <Form.Control.Feedback type="invalid">
-            Please Enter Weight{' '}
           </Form.Control.Feedback>
         </Form.Group>
         <Form.Group controlId="formStory">
@@ -197,7 +253,7 @@ function NFTForm() {
           <Form.Label>Availability</Form.Label>
           <Form.Control
             as="textarea"
-            rows={4}
+            rows={2}
             placeholder="Enter Availability"
             required
             name="availability"
@@ -209,24 +265,10 @@ function NFTForm() {
             Please Enter Availability{' '}
           </Form.Control.Feedback>
         </Form.Group>
-        <Form.Group controlId="formDate">
-          <Form.Label>Date Created</Form.Label>
-          <Form.Control
-            type="date"
-            name="date"
-            value={newForm.date}
-            onChange={handleOnChange}
-            max={formDate}
-            required
-          />
-          <Form.Control.Feedback type="invalid">
-            Please Enter valid Date{' '}
-          </Form.Control.Feedback>
-        </Form.Group>
         <Button variant="primary" type="submit">
           Submit
         </Button>{' '}
-        <Button as="input" type="reset" value="Cancel" />
+        <Button as="input" type="reset" value="Reset" />
       </Form>
     </div>
   )

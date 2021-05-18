@@ -3,7 +3,7 @@ import './App.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import { Row, Col } from 'react-bootstrap'
 import Menu from './components/menu'
-import Image from './components/image'
+//import Image from './components/image'
 import NFTForm from './components/form'
 
 function App() {
@@ -11,14 +11,14 @@ function App() {
     <div className="App">
       <Menu />
       <Row className="landing">
-        <Col>
+        {/* <Col>
           <Image />
-        </Col>
+        </Col> */}
 
         <Col>
           <NFTForm />
         </Col>
-        
+
       </Row>
     </div>
   )
