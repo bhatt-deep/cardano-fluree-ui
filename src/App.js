@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <Menu />
       <Row className="landing" >
-        <Col><Image /></Col>
+        <Col><Image/></Col>
         <Col><NFTForm /></Col>
 
       </Row>

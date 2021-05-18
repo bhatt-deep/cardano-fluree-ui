@@ -3,7 +3,8 @@ import Form from "react-bootstrap/Form"
 import { Button } from 'react-bootstrap'
 import Axios from 'axios'
 
-function NFTForm() {
+
+function NFTForm()  {
     const initialState = {
         category: "Art",
         artwork: "",
@@ -22,7 +23,31 @@ function NFTForm() {
     console.log(formDate)
     const [validated, setValidated] = useState(false)
     const [newForm, setForm] = useState(initialState)
+    const [selectedFile, setSelectedFile] = useState()
+    const [preview, setPreview] = useState()
+    useEffect(() => {
+        if (!selectedFile) {
+            setPreview(undefined)
+            return
+        }
 
+        const objectUrl = URL.createObjectURL(selectedFile)
+        setPreview(objectUrl)
+
+        // free memory when ever this component is unmounted
+        return () => URL.revokeObjectURL(objectUrl)
+    }, [selectedFile])
+
+    const onSelectFile = e => {
+        handleOnChange(e)
+        if (!e.target.files || e.target.files.length === 0) {
+            setSelectedFile(undefined)
+            return
+        }
+
+        // I've kept this example simple by using the first image instead of multiple
+        setSelectedFile(e.target.files[0])
+    }
 
     const handleSubmit = (event) => {
         const form = event.currentTarget
@@ -82,7 +107,8 @@ function NFTForm() {
 
                 <Form.Group controlId="formImgURL">
                     <Form.Label>Image File</Form.Label>
-                    <Form.File id="formImgURL" required name="imgFile" value={newForm.imgFile} onChange={handleOnChange} />
+                    <Form.File id="formImgURL" required name="imgFile" value={newForm.imgFile}  onChange={onSelectFile} />
+                    {selectedFile &&  <img src={preview} alt="uploaded img" fluid style={{border:"none", maxWidth:"600px",height:'auto'} }/>}
                 </Form.Group>
 
                 <Form.Group controlId="formArtworkName">
@@ -199,6 +225,7 @@ function NFTForm() {
                     Submit
                 </Button>
             </Form>
+            
         </div>
     )
 }
