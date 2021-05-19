@@ -1,234 +1,277 @@
 import React, { useState, useEffect } from 'react'
-import Form from "react-bootstrap/Form"
-import { Button } from 'react-bootstrap'
+import Form from 'react-bootstrap/Form'
+import { Button, Col, Image } from 'react-bootstrap'
 import Axios from 'axios'
 
+function NFTForm() {
+  const url = 'http://localhost:3001/'
+  var formDate = new Date().toISOString().split('T')[0]
 
-function NFTForm()  {
-    const initialState = {
-        category: "Art",
-        artwork: "",
-        artist: "",
-        imgFile: "",
-        materials: "",
-        dimensions: "",
-        weight: "",
-        story: "",
-        significance: "",
-        availability: "",
-        date: ""
-    }
-    const url = "http://localhost:3000/"
-    var formDate = new Date().toISOString().split("T")[0]
-    console.log(formDate)
-    const [validated, setValidated] = useState(false)
-    const [newForm, setForm] = useState(initialState)
-    const [selectedFile, setSelectedFile] = useState()
-    const [preview, setPreview] = useState()
-    useEffect(() => {
-        if (!selectedFile) {
-            setPreview(undefined)
-            return
-        }
+  const [validated, setValidated] = useState(false)
+  const [newForm, setForm] = useState({
+    category      : '',
+    name          : '',
+    artist        : '',
+    weight        : '',
+    story         : '',
+    date          : '',
+    imageUrl      : '',
+    materials     : '',
+    dimensions    : '',
+    significance  : '',
+    availability  : ''
+    
+  })
+  const [selectedFile, setSelectedFile] = useState()
+  const [preview, setPreview] = useState()
 
-        const objectUrl = URL.createObjectURL(selectedFile)
-        setPreview(objectUrl)
-
-        // free memory when ever this component is unmounted
-        return () => URL.revokeObjectURL(objectUrl)
-    }, [selectedFile])
-
-    const onSelectFile = e => {
-        handleOnChange(e)
-        if (!e.target.files || e.target.files.length === 0) {
-            setSelectedFile(undefined)
-            return
-        }
-
-        // I've kept this example simple by using the first image instead of multiple
-        setSelectedFile(e.target.files[0])
+  useEffect(() => {
+    if (!selectedFile) {
+      setPreview(undefined)
+      return
     }
 
-    const handleSubmit = (event) => {
-        const form = event.currentTarget
-        //console.log(newForm)
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-        setValidated(true)
-        console.log(newForm)
-        Axios.post(url, {
-            category: newForm.category,
-            artwork: newForm.artwork,
-            artist: newForm.artist,
-            imgFile: newForm.imgFile,
-            materials: newForm.materials,
-            dimensions: newForm.dimensions,
-            weight: newForm.weight,
-            story: newForm.story,
-            significance: newForm.significance,
-            availability: newForm.availability,
-            date: newForm.date
-        }).then(
-            res => {
-                console.log(res.data)
-            }
-        )
+    const objectUrl = URL.createObjectURL(selectedFile)
+    console.log('objectUrl', objectUrl)
+    setPreview(objectUrl)
+
+    return () => URL.revokeObjectURL(objectUrl)
+  }, [selectedFile])
+
+  const onSelectFile = (e) => {
+    handleOnChange(e)
+    if (!e.target.files || e.target.files.length === 0) {
+      setSelectedFile(undefined)
+      return
     }
+    setSelectedFile(e.target.files[0])
+  }
 
-    useEffect(() => { }, [newForm])
-    const handleOnChange = (e) => {
-        const { name, value } = e.target
+  const handleSubmit = async (event) => {
+    const form = event.currentTarget
 
-        setForm({ ...newForm, [name]: value })
+    if (form.checkValidity() === false) {
+      event.preventDefault()
+      event.stopPropagation()
     }
+    setValidated(true)
 
-    return (
-        <div>
-            <Form noValidate validated={validated} onSubmit={handleSubmit} style={{ width: "70%", marginLeft: "15%", marginTop: "5%" }}>
+    await Axios.post(url, {
+      category: newForm.category,
+      name: newForm.name,
+      artist: newForm.artist,
+      imageUrl: newForm.imageUrl,
+      //imageUrl: '/Users/manikjain/Desktop/TADODAHO.png',
+      materials: newForm.materials,
+      dimensions: newForm.dimensions,
+      weight: newForm.weight,
+      story: newForm.story,
+      significance: newForm.significance,
+      availability: newForm.availability,
+      date: newForm.date,
+    }).then((res) => {
+      alert('Data has been successfully stored')
+    })
+  }
 
-                <Form.Group controlId="formCategory">
-                    <Form.Label>Category</Form.Label>
-                    <Form.Control
-                        as="select"
-                        name="category"
-                        value={newForm.category}
-                        onChange={handleOnChange}
-                        required>
-                        <option>Art</option>
-                        <option>Music</option>
-                        <option>Identity</option>
-                    </Form.Control>
+  useEffect(() => {}, [newForm])
 
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                    <Form.Control.Feedback type="invalid">Please Enter Category </Form.Control.Feedback>
-                </Form.Group>
+  const handleOnChange = (e) => {
+    console.log(e)
+    const { name, value } = e.target
+    setForm({ ...newForm, [name]: value })
+  }
 
-                <Form.Group controlId="formImgURL">
-                    <Form.Label>Image File</Form.Label>
-                    <Form.File id="formImgURL" required name="imgFile" value={newForm.imgFile}  onChange={onSelectFile} />
-                    {selectedFile &&  <img src={preview} alt="uploaded img" fluid style={{border:"none", maxWidth:"600px",height:'auto'} }/>}
-                </Form.Group>
+  return (
+    <div>
+      <Form
+        validated={validated}
+        onSubmit={handleSubmit}
+        style={{ width: '70%', marginLeft: '15%', marginTop: '2%' }}
+      >
+        <Form.Group controlId="formCategory">
+          <Form.Label>Category</Form.Label>
+          <Form.Control
+            as="select"
+            name="category"
+            value={newForm.category}
+            onChange={handleOnChange}
+            required
+          >
+            <option>Art</option>
+            <option disabled>Music</option>
+            <option disabled>Identity</option>
+          </Form.Control>
+          <Form.Control.Feedback type="invalid">
+            Please Enter Category{' '}
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group controlId="formImgURL">
+          <Form.Label>Image File</Form.Label>
+          <Form.File
+            id="formImgURL"
+            required
+            name="imageUrl"
+            value={newForm.imageUrl}
+            onChange={onSelectFile}
+          />
+          {selectedFile && (
+            <Image
+              src={preview}
+              alt="uploaded img"
+              thumbnail
+              xs={6}
+              md={4}
+              style={{ border: 'none', maxWidth: '1000px', height: '300px' }}
+            />
+          )}
+        </Form.Group>
+        <Form.Row>
+          <Form.Group as={Col} md="6" controlId="formArtworkName">
+            <Form.Label>Artifact Name</Form.Label>
+            <Form.Control
+              placeholder="Name your artwork"
+              required
+              name="name"
+              value={newForm.name}
+              onChange={handleOnChange}
+              type="text"
+            />
+            <Form.Control.Feedback type="invalid">
+              Please Enter Artifact Name{' '}
+            </Form.Control.Feedback>
+          </Form.Group>
 
-                <Form.Group controlId="formArtworkName">
-                    <Form.Label>Artwork Name</Form.Label>
-                    <Form.Control
-                        placeholder="Name your artwork"
-                        required
-                        name="artwork"
-                        value={newForm.artwork}
-                        onChange={handleOnChange}
-                        type="text" />
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                    <Form.Control.Feedback type="invalid">Please Enter Artwork Name </Form.Control.Feedback>
-                </Form.Group>
+          <Form.Group as={Col} md="6" controlId="formArtistName">
+            <Form.Label>Artist Name</Form.Label>
+            <Form.Control
+              placeholder="Enter Artist Name"
+              required
+              name="artist"
+              value={newForm.artist}
+              onChange={handleOnChange}
+              type="text"
+            />
+            <Form.Control.Feedback type="invalid">
+              Please Enter Artist Name{' '}
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group as={Col} md="4" controlId="formDimensions">
+            <Form.Label>Dimensions</Form.Label>
+            <Form.Control
+              placeholder="Enter Dimensions"
+              required
+              name="dimensions"
+              value={newForm.dimensions}
+              onChange={handleOnChange}
+              type="text"
+            />
+            <Form.Control.Feedback type="invalid">
+              Please Enter Dimensions{' '}
+            </Form.Control.Feedback>
+          </Form.Group>
 
-                <Form.Group controlId="formArtistName">
-                    <Form.Label>Artist Name</Form.Label>
-                    <Form.Control placeholder="Enter Artist Name"
-                        required
-                        name="artist"
-                        value={newForm.artist}
-                        onChange={handleOnChange}
-                        type="text" />
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                    <Form.Control.Feedback type="invalid">Please Enter Artist Name </Form.Control.Feedback>
-                </Form.Group>
+          <Form.Group as={Col} md="4" controlId="formWeight">
+            <Form.Label>Weight</Form.Label>
+            <Form.Control
+              placeholder="Enter Weight"
+              required
+              name="weight"
+              value={newForm.weight}
+              onChange={handleOnChange}
+              type="text"
+            />
 
-                <Form.Group controlId="formMaterials">
-                    <Form.Label>Materials</Form.Label>
-                    <Form.Control as="textarea" rows={4}
-                        required
-                        name="materials"
-                        value={newForm.materials}
-                        onChange={handleOnChange}
-                        type="textarea" />
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                    <Form.Control.Feedback type="invalid">Please Enter Materials </Form.Control.Feedback>
-                </Form.Group>
+            <Form.Control.Feedback type="invalid">
+              Please Enter Weight{' '}
+            </Form.Control.Feedback>
+          </Form.Group>
 
-                <Form.Group controlId="formDimensions">
-                    <Form.Label>Dimensions</Form.Label>
-                    <Form.Control placeholder="Enter Dimensions"
-                        required
-                        name="dimensions"
-                        value={newForm.dimensions}
-                        onChange={handleOnChange}
-                        type="text" />
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                    <Form.Control.Feedback type="invalid">Please Enter Dimensions </Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group controlId="formWeight">
-                    <Form.Label>Weight</Form.Label>
-                    <Form.Control placeholder="Enter Weight"
-                        required
-                        name="weight"
-                        value={newForm.weight}
-                        onChange={handleOnChange}
-                        type="text" />
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                    <Form.Control.Feedback type="invalid">Please Enter Weight </Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group controlId="formStory">
-                    <Form.Label>Story</Form.Label>
-                    <Form.Control as="textarea" rows={4}
-                        required
-                        name="story"
-                        value={newForm.story}
-                        onChange={handleOnChange}
-                        type="textarea" />
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                    <Form.Control.Feedback type="invalid">Please Enter Story </Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group controlId="formSignificance">
-                    <Form.Label>Significance</Form.Label>
-                    <Form.Control as="textarea" rows={4}
-                        required
-                        name="significance"
-                        value={newForm.significance}
-                        onChange={handleOnChange}
-                        type="textarea" />
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                    <Form.Control.Feedback type="invalid">Please Enter Significance </Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group controlId="formAvailability">
-                    <Form.Label>Availability</Form.Label>
-                    <Form.Control placeholder="Enter Availability"
-                        required
-                        name="availability"
-                        value={newForm.availability}
-                        onChange={handleOnChange}
-                        type="text" />
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                    <Form.Control.Feedback type="invalid">Please Enter Availability </Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group controlId="formDate">
-                    <Form.Label>Date</Form.Label>
-                    <Form.Control type="date"
-                        name="date"
-                        value={newForm.date}
-                        onChange={handleOnChange}
-                        max={formDate}
-                        required
-                    />
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                    <Form.Control.Feedback type="invalid">Please Enter valid Date </Form.Control.Feedback>
-                </Form.Group>
-
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
-            </Form>
-            
-        </div>
-    )
+          <Form.Group as={Col} md="4" controlId="formDate">
+            <Form.Label>Date Created</Form.Label>
+            <Form.Control
+              type="date"
+              name="date"
+              value={newForm.date}
+              onChange={handleOnChange}
+              max={formDate}
+              required
+            />
+            <Form.Control.Feedback type="invalid">
+              Please Enter valid Date{' '}
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Form.Row>
+        <Form.Group controlId="formMaterials">
+          <Form.Label>Materials</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={2}
+            required
+            name="materials"
+            value={newForm.materials}
+            onChange={handleOnChange}
+            type="textarea"
+          />
+          <Form.Control.Feedback type="invalid">
+            Please Enter Materials{' '}
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group controlId="formStory">
+          <Form.Label>Story behind Artifact</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={4}
+            required
+            name="story"
+            value={newForm.story}
+            onChange={handleOnChange}
+            type="textarea"
+          />
+          <Form.Control.Feedback type="invalid">
+            Please Enter Story{' '}
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group controlId="formSignificance">
+          <Form.Label>Cultural Significance</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={4}
+            required
+            name="significance"
+            value={newForm.significance}
+            onChange={handleOnChange}
+            type="textarea"
+          />
+          <Form.Control.Feedback type="invalid">
+            Please Enter Significance{' '}
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group controlId="formAvailability">
+          <Form.Label>Availability</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={2}
+            placeholder="Enter Availability"
+            required
+            name="availability"
+            value={newForm.availability}
+            onChange={handleOnChange}
+            type="textarea"
+          />
+          <Form.Control.Feedback type="invalid">
+            Please Enter Availability{' '}
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>{' '}
+        <Button as="input" type="reset" value="Reset" />
+      </Form>
+    </div>
+  )
 }
-
 
 export default NFTForm
