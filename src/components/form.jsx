@@ -4,12 +4,13 @@ import { Button, Col, Image } from 'react-bootstrap'
 import Axios from 'axios'
 
 function NFTForm() {
-  const url = 'http://localhost:3001/'
+
+  const url = 'http://localhost:3001'
   var formDate = new Date().toISOString().split('T')[0]
 
   const [validated, setValidated] = useState(false)
   const [newForm, setForm] = useState({
-    category      : '',
+    category      : 'Art',
     name          : '',
     artist        : '',
     weight        : '',
@@ -20,10 +21,10 @@ function NFTForm() {
     dimensions    : '',
     significance  : '',
     availability  : ''
-    
   })
   const [selectedFile, setSelectedFile] = useState()
   const [preview, setPreview] = useState()
+  const [imageBuffer, setBuffer] = useState()
 
   useEffect(() => {
     if (!selectedFile) {
@@ -38,13 +39,16 @@ function NFTForm() {
     return () => URL.revokeObjectURL(objectUrl)
   }, [selectedFile])
 
-  const onSelectFile = (e) => {
+  const onSelectFile = async (e) => {
     handleOnChange(e)
     if (!e.target.files || e.target.files.length === 0) {
       setSelectedFile(undefined)
       return
     }
     setSelectedFile(e.target.files[0])
+
+    let file = e.target.files[0]
+    setBuffer(file) 
   }
 
   const handleSubmit = async (event) => {
@@ -56,30 +60,36 @@ function NFTForm() {
     }
     setValidated(true)
 
-    await Axios.post(url, {
-      category: newForm.category,
-      name: newForm.name,
-      artist: newForm.artist,
-      imageUrl: newForm.imageUrl,
-      //imageUrl: '/Users/manikjain/Desktop/TADODAHO.png',
-      materials: newForm.materials,
-      dimensions: newForm.dimensions,
-      weight: newForm.weight,
-      story: newForm.story,
-      significance: newForm.significance,
-      availability: newForm.availability,
-      date: newForm.date,
+    const formData = new FormData();
+    formData.append('category', newForm.category)
+    formData.append('name', newForm.name)
+    formData.append('artist', newForm.artist)
+    formData.append('image', imageBuffer)
+    formData.append('materials', newForm.materials)
+    formData.append('dimensions', newForm.dimensions)
+    formData.append('weight', newForm.weight)
+    formData.append('story', newForm.story)
+    formData.append('significance', newForm.significance)
+
+    formData.append('availability', newForm.availability)
+    formData.append('date', newForm.date)
+
+    await Axios.post(url, formData, {
+      headers: {'Content-Type': 'multipart/form-data'}
     }).then((res) => {
+      console.log(res)
       alert('Data has been successfully stored')
     })
   }
 
   useEffect(() => {}, [newForm])
 
-  const handleOnChange = (e) => {
+  const handleOnChange = async (e) => {
+    e.preventDefault()
     console.log(e)
-    const { name, value } = e.target
-    setForm({ ...newForm, [name]: value })
+    //console.log(imageBuffer)
+      let { name, value } = e.target
+      await setForm({ ...newForm, [name]: value })
   }
 
   return (

@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import { Row, Col } from 'react-bootstrap'
 import Menu from './components/menu'
 import NFTForm from './components/form'
+import QRCode from './components/qrcode'
 
 import Image from './components/image'
 import Testart from './components/testartCertificate'
@@ -36,6 +37,7 @@ function App() {
           <NFTForm />
         </Col>
       </Row>
+      <Row><QRCode /></Row>
     </div>
   )
 }
