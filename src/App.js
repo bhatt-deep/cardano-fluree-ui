@@ -2,6 +2,7 @@ import React from 'react'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import { Row, Col } from 'react-bootstrap'
+import QRCode from './components/qrcode'
 import Menu from './components/menu'
 import NFTForm from './components/form'
 
@@ -9,6 +10,9 @@ import Image from './components/image'
 import Testart from './components/testartCertificate'
 import Artist from './components/artist'
 import Hash from './components/hash'
+
+
+
 
 function App() {
   return (
@@ -36,6 +40,7 @@ function App() {
           <NFTForm />
         </Col>
       </Row>
+      <Row><QRCode /></Row>
     </div>
   )
 }
