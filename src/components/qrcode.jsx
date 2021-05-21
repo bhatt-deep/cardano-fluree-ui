@@ -17,7 +17,7 @@ const styles = {
 const qrcode = () => {
     return (
         <div style={styles.qrcode}>
-            <QRCode style={{ width: 100,height: 100 }} value={JSON.stringify(data)} />
+            <QRCode style={{ width: 50,height: 50, paddingLeft : 10}} value={JSON.stringify(data)} />
         </div>
     )
 }

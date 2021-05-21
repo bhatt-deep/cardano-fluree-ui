@@ -5,7 +5,8 @@ import Axios from 'axios'
 
 function NFTForm() {
 
-  const url = 'http://localhost:3001'
+  const url = 'http://localhost:3001/'
+  const dataUrl = 'http://localhost:3001/data'
   var formDate = new Date().toISOString().split('T')[0]
 
   const [validated, setValidated] = useState(false)
@@ -73,6 +74,8 @@ function NFTForm() {
 
     formData.append('availability', newForm.availability)
     formData.append('date', newForm.date)
+
+    console.log(`Passing request to : ${url}`)
 
     await Axios.post(url, formData, {
       headers: {'Content-Type': 'multipart/form-data'}

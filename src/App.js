@@ -16,7 +16,7 @@ function App() {
     <div className="App">
       <Menu />
       <Row className="landing">
-        {/* <Col>
+        <Col>
           <Image />
           <br></br>
           <Hash />
@@ -32,12 +32,14 @@ function App() {
           <br></br>
 
           <Artist />
-        </Col> */}
-        <Col>
+        </Col>
+        </Row>
+
+        {/* <Col>
           <NFTForm />
         </Col>
       </Row>
-      <Row><QRCode /></Row>
+      <Row><QRCode /></Row> */}
     </div>
   )
 }
