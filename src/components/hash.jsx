@@ -65,9 +65,7 @@ function Hash()  {
             </Row>
           </Col>
 
-              <br></br>
-              <br></br>
-              <br></br>
+              
 
           <Col md={12}>
             <Row>
