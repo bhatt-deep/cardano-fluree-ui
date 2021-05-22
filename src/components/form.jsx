@@ -6,6 +6,7 @@ import {Redirect, useHistory} from 'react-router-dom'
 
 function NFTForm() {
 
+  const history = useHistory() 
   const url = 'http://localhost:3001/'
   const dataUrl = 'http://localhost:3001/data'
   var formDate = new Date().toISOString().split('T')[0]
@@ -54,6 +55,7 @@ function NFTForm() {
   }
 
   const handleSubmit = async (event) => {
+    event.preventDefault()
     const form = event.currentTarget
 
     if (form.checkValidity() === false) {
@@ -82,7 +84,8 @@ function NFTForm() {
       headers: {'Content-Type': 'multipart/form-data'}
     }).then((res) => {
       console.log(res)
-      alert('Data has been successfully stored')
+      alert(`Data has been successfully stored.`)
+      history.push('./certificate')
     })
 
   }
