@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form'
 import { Button, Col, Image } from 'react-bootstrap'
 import Axios from 'axios'
+import {Redirect, useHistory} from 'react-router-dom'
 
 function NFTForm() {
 
@@ -83,6 +84,7 @@ function NFTForm() {
       console.log(res)
       alert('Data has been successfully stored')
     })
+
   }
 
   useEffect(() => {}, [newForm])

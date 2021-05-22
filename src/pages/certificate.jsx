@@ -13,7 +13,7 @@ export default function Certificate() {
 
     return (
         <div class="App">
-          <Menu />
+         
           <Row>
             <Col>
               <Image />

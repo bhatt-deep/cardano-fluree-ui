@@ -15,7 +15,8 @@ function App() {
         <Menu />
         <Row className="landing">
           <Col>
-            <NFTForm />
+            {/* <NFTForm /> */}
+            <Route path='/' exact component={NFTForm}/>
           </Col>
         </Row>
       </div>
