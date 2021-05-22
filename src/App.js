@@ -2,46 +2,33 @@ import React from 'react'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import { Row, Col } from 'react-bootstrap'
-import QRCode from './components/qrcode'
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import Menu from './components/menu'
 import NFTForm from './components/form'
 
-import Image from './components/image'
-import Testart from './components/testartCertificate'
-import Artist from './components/artist'
-import Hash from './components/hash'
+import Certificate from './pages/certificate'
 
 
 
 
 function App() {
   return (
-    <div className="App">
-      <Menu />
-      <Row className="landing">
-        {/* <Col>
-          <Image />
-          <br></br>
-          <Hash />
-        </Col>
-        <Col>
-          <Testart />
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
+    <Router>
+      <div className="App">
+        <Menu />
+        <Row className="landing">
+          <Col>
+            {/* <NFTForm /> */}
+            <Route path='/' exact component={NFTForm}/>
+          </Col>
+        </Row>
+      </div>
+      <Switch>
+        <Route path='/certificate' exact component={Certificate}/>
+      </Switch>
+      
+    </Router>
 
-          <Artist />
-        </Col> */}
-        <Col>
-          <NFTForm />
-        </Col>
-      </Row>
-      <Row><QRCode /></Row>
-    </div>
   )
 }
 
