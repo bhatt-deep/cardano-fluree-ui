@@ -1,15 +1,18 @@
 import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap'
 import Card from 'react-bootstrap/Card'
 import data from '../data/data.json'
+import QRCode from './qrcode'
 
 function Hash()  {
     return (
         <div>
 
-<Card bg="dark">
+{/* <Card bg="dark">
         <Card.Body>
           <table>
-            <tr>
+          <Col>
+          <tr>
               {data.map((postDetail, index) => {
                 return (
                   <label>
@@ -18,12 +21,7 @@ function Hash()  {
                   </label>
                 )
               })}
-            </tr>
-            <br></br>
-            <br></br>
-            <br></br>
-
-            <tr>
+            
               {data.map((postDetail) => {
                 return (
                   <label>
@@ -35,10 +33,71 @@ function Hash()  {
                 )
               })}
             </tr>
+          
+          </Col>
+
+          <Col>
+              
+          <QRCode></QRCode>
+          </Col>
+            
 
           </table>
+
+        </Card.Body>
+      </Card> */}
+
+<Card bg="dark">
+        <Card.Body>
+
+          <Container>
+
+          <Col md={8}>
+            <Row>
+            {data.map((postDetail, index) => {
+                return (
+                  <label>
+                    Certificate Id <br/>
+                        {postDetail.txhHash}
+                  </label>
+                )
+              })}
+            </Row>
+          </Col>
+
+              
+
+          <Col md={12}>
+            <Row>
+              
+            {data.map((postDetail) => {
+                return (
+                  <label>
+                     Issued On: <br/>
+                    
+                     {postDetail.issuedon}
+                        
+                  </label>
+                )
+              })}
+
+                {' '}
+                {' '}
+                {' '}
+
+               <QRCode></QRCode>
+
+            </Row>
+          
+          </Col>
+
+          </Container>
+
         </Card.Body>
       </Card>
+
+
+
     </div>
   )
 }
