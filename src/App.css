@@ -3,3 +3,7 @@
     color: #FFF;
     border: #111;
   }
+
+  td {
+    padding-left: 15px;
+  }
