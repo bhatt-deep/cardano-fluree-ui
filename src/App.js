@@ -8,6 +8,9 @@ import NFTForm from './components/form'
 
 import Certificate from './pages/certificate'
 
+
+
+
 function App() {
   return (
     <Router>
@@ -20,12 +23,12 @@ function App() {
           </Col>
         </Row>
       </div>
-
       <Switch>
         <Route path='/certificate' exact component={Certificate}/>
       </Switch>
       
     </Router>
+
   )
 }
 

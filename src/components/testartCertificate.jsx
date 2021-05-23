@@ -1,16 +1,19 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card'
 
+
 export default function DigitalCertificate(props) {
   return (
     <div>
       <br></br>
       <h2>Digital Certificate of Authenticity</h2>
 
+
       <Card bg="dark">
         <Card.Body>
           <table>
             <tr>
+
               
                 <td>
                 <label>
@@ -18,11 +21,13 @@ export default function DigitalCertificate(props) {
                   </label>
                 </td>
               
+
             </tr>
 
             <br></br>
            
             <tr>
+
               <label>
                 <td>
                   <p>Materials : </p>
@@ -41,55 +46,68 @@ export default function DigitalCertificate(props) {
                 <td>Dimentions:</td>
                 <td> {props.testArtData.dimensions}</td>
               </label>
+
             </tr>
 
             <br></br>
 
             <tr>
+
               <label>
                 <td>Weight:</td>
                 <td> {props.testArtData.weight}</td>
               </label>
+
             </tr>
 
             <br></br>
 
             <tr>
+
               <label>
                 <td>Story Behind Art:</td>
                 <td> {props.testArtData.story}</td>
               </label>
+
             </tr>
 
             <br></br>
 
             <tr>
+
               <label>
                 <td>Cultural Significance:</td>
                 <td> {props.testArtData.significance}</td>
               </label>
+
             </tr>
 
             <br></br>
 
             <tr>
+
               <label>
                 <td>Availability:</td>
                 <td> {props.testArtData.availability}</td>
               </label>
+
             </tr>
 
             <br></br>
 
             <tr>
+
               <label>
                 <td>Date Created:</td>
                 <td> {props.testArtData.date}</td>
               </label>
+
             </tr>
           </table>
         </Card.Body>
       </Card>
     </div>
   )
+
 }
+

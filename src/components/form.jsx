@@ -80,6 +80,7 @@ export default function NFTForm() {
 
     console.log(`Passing request to : ${url}`)
 
+
     // await Axios.post(url, formData, {
     //   headers: {'Content-Type': 'multipart/form-data'}
     // }).then((res) => {
@@ -93,6 +94,7 @@ export default function NFTForm() {
     // }
 
     // history.push('./certificate', result.hash)
+
 
   }
 
