@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form'
 import { Button, Col, Image } from 'react-bootstrap'
 import Axios from 'axios'
 import {Redirect, useHistory} from 'react-router-dom'
+import FullPageLoader from './fullPageLoader'
 
 export default function NFTForm() {
 
@@ -28,6 +29,7 @@ export default function NFTForm() {
   const [selectedFile, setSelectedFile] = useState()
   const [preview, setPreview] = useState()
   const [imageBuffer, setBuffer] = useState()
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     if (!selectedFile) {
@@ -55,6 +57,7 @@ export default function NFTForm() {
   }
 
   const handleSubmit = async (event) => {
+    setLoading(true)
     event.preventDefault()
     const form = event.currentTarget
 
@@ -80,20 +83,22 @@ export default function NFTForm() {
 
     console.log(`Passing request to : ${url}`)
 
+    let result = {
+      hash : '1qpuu9s2chx73ccyjfstd8y6lt57ws4hxjjmu6y9kuazdmef0xxsul3whnjle2wxr76vptwgxahnkl7ncddxx6fyqc8rstxk0hh'
+    }
 
-    // await Axios.post(url, formData, {
-    //   headers: {'Content-Type': 'multipart/form-data'}
-    // }).then((res) => {
-    //   console.log(res)
-    //   alert(`Data has been successfully stored.`)
-    //   history.push('./certificate', res.hash)
-    // })
 
-    // let result = {
-    //   hash : '1qpuu9s2chx73ccyjfstd8y6lt57ws4hxjjmu6y9kuazdmef0xxsul3whnjle2wxr76vptwgxahnkl7ncddxx6fyqc8rstxk0hh'
-    // }
+    await Axios.post(url, formData, {
+      headers: {'Content-Type': 'multipart/form-data'}
+    }).then((res) => {
+      console.log(res)
+      alert(`Data has been successfully stored.`)
+      setLoading(false)
+      history.push('./certificate', result.hash)
+    })
 
-    // history.push('./certificate', result.hash)
+    
+    //history.push('./certificate', result.hash)
 
 
   }
@@ -296,6 +301,8 @@ export default function NFTForm() {
         </Button>{' '}
         <Button as="input" type="reset" value="Reset" />
       </Form>
+      {loading ? <FullPageLoader/> : <Form/>}
     </div>
+    
   )
 }
