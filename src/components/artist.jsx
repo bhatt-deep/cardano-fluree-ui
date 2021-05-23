@@ -1,55 +1,51 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Card from 'react-bootstrap/Card'
-import data from '../data/data.json'
 
-function Artist() {
+function Artist(props) {
+  //console.log(props.artistData)
   return (
     <div>
       <Card bg="dark">
         <Card.Body>
           <table>
             <tr>
-              {data.map((postDetail, index) => {
-                return (
-                  <label>
-                    
-                    <td>
-                        <b>
-                        {postDetail.artist}
-                        </b>
-                    </td>
-                  </label>
-                )
-              })}
+
+
+              <label>
+
+                <td>
+                  <b>
+                    {props.artistData.artist}
+                  </b>
+                </td>
+              </label>
+
+
             </tr>
 
             <tr>
-              {data.map((postDetail) => {
-                return (
-                  <label>
-                     
-                     <td>
-                     "{postDetail.artist_field}"
+
+              <label>
+
+                <td>
+                  "{props.artistData.artist_field}"
                          </td>
-                  </label>
-                )
-              })}
+              </label>
+
             </tr>
 
             <br></br>
-              <br></br>
+            <br></br>
 
             <tr>
-              {data.map((postDetail, index) => {
-                return (
-                  <label>
-                    <td>
-                    "{postDetail.artist_description}"
+
+              <label>
+                <td>
+                  "{props.artistData.artist_Description}"
                     </td>
-                    
-                  </label>
-                )
-              })}
+
+              </label>
+
             </tr>
           </table>
         </Card.Body>

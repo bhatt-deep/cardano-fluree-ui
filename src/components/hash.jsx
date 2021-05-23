@@ -1,10 +1,10 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap'
 import Card from 'react-bootstrap/Card'
-import data from '../data/data.json'
 import QRCode from './qrcode'
 
-function Hash()  {
+function Hash(props)  {
+  //console.log(props.hashData)
     return (
         <div>
 
@@ -54,14 +54,12 @@ function Hash()  {
 
           <Col md={8}>
             <Row>
-            {data.map((postDetail, index) => {
-                return (
+            
                   <label>
                     Certificate Id <br/>
-                        {postDetail.txhHash}
+                        {props.hashData.cid}
                   </label>
-                )
-              })}
+                
             </Row>
           </Col>
 
@@ -70,22 +68,20 @@ function Hash()  {
           <Col md={12}>
             <Row>
               
-            {data.map((postDetail) => {
-                return (
+            
                   <label>
                      Issued On: <br/>
                     
-                     {postDetail.issuedon}
+                     {props.hashData.date}
                         
                   </label>
-                )
-              })}
+               
 
                 {' '}
                 {' '}
                 {' '}
 
-               <QRCode></QRCode>
+               <QRCode data={props.hashData}></QRCode>
 
             </Row>
           

@@ -1,6 +1,5 @@
 import React from 'react'
 import QRCode from 'qrcode.react'
-import data from '../data/data.json'
 
 const styles = {
     root: {
@@ -14,10 +13,11 @@ const styles = {
     },
   };
 
-const qrcode = () => {
+const qrcode = (props) => {
+  console.log(props.data)
     return (
         <div style={styles.qrcode}>
-            <QRCode style={{ width: 100,height: 120, paddingLeft : 10}} value={JSON.stringify(data)} />
+            <QRCode style={{ width: 100,height: 120, paddingLeft : 10}} value={JSON.stringify(props.data)} />
         </div>
     )
 }

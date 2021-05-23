@@ -6,6 +6,7 @@ import {Redirect, useHistory} from 'react-router-dom'
 
 function NFTForm() {
 
+  const history = useHistory() 
   const url = 'http://localhost:3001/'
   const dataUrl = 'http://localhost:3001/data'
   var formDate = new Date().toISOString().split('T')[0]
@@ -54,6 +55,7 @@ function NFTForm() {
   }
 
   const handleSubmit = async (event) => {
+    event.preventDefault()
     const form = event.currentTarget
 
     if (form.checkValidity() === false) {
@@ -77,12 +79,15 @@ function NFTForm() {
     formData.append('date', newForm.date)
 
     console.log(`Passing request to : ${url}`)
-
+    let result = {
+      hash : '1qpuu9s2chx73ccyjfstd8y6lt57ws4hxjjmu6y9kuazdmef0xxsul3whnjle2wxr76vptwgxahnkl7ncddxx6fyqc8rstxk0hh'
+    }
     await Axios.post(url, formData, {
       headers: {'Content-Type': 'multipart/form-data'}
     }).then((res) => {
       console.log(res)
-      alert('Data has been successfully stored')
+      alert(`Data has been successfully stored.`)
+      history.push('./certificate', result)
     })
 
   }
