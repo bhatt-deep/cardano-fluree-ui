@@ -4,7 +4,7 @@ import { Button, Col, Image } from 'react-bootstrap'
 import Axios from 'axios'
 import {Redirect, useHistory} from 'react-router-dom'
 
-function NFTForm() {
+export default function NFTForm() {
 
   const history = useHistory() 
   const url = 'http://localhost:3001/'
@@ -85,8 +85,14 @@ function NFTForm() {
     }).then((res) => {
       console.log(res)
       alert(`Data has been successfully stored.`)
-      history.push('./certificate')
+      history.push('./certificate', res)
     })
+
+    // let result = {
+    //   hash : '1qpuu9s2chx73ccyjfstd8y6lt57ws4hxjjmu6y9kuazdmef0xxsul3whnjle2wxr76vptwgxahnkl7ncddxx6fyqc8rstxk0hh'
+    // }
+
+    // history.push('./certificate', result)
 
   }
 
@@ -291,5 +297,3 @@ function NFTForm() {
     </div>
   )
 }
-
-export default NFTForm

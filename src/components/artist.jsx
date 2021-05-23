@@ -1,55 +1,33 @@
 import React, { useEffect } from 'react'
 import Card from 'react-bootstrap/Card'
-import data from '../data/data.json'
 
-function Artist() {
+export default function Artist(props) {
   return (
     <div>
       <Card bg="dark">
         <Card.Body>
           <table>
             <tr>
-              {data.map((postDetail, index) => {
-                return (
-                  <label>
-                    
-                    <td>
-                        <b>
-                        {postDetail.artist}
-                        </b>
-                    </td>
-                  </label>
-                )
-              })}
+              <label>
+                <td>
+                  <b>{props.artistData.artist}</b>
+                </td>
+              </label>
             </tr>
 
             <tr>
-              {data.map((postDetail) => {
-                return (
-                  <label>
-                     
-                     <td>
-                     "{postDetail.artist_field}"
-                         </td>
-                  </label>
-                )
-              })}
+              <label>
+                <td>"{props.artistData.artist_field}"</td>
+              </label>
             </tr>
 
             <br></br>
-              <br></br>
+            <br></br>
 
             <tr>
-              {data.map((postDetail, index) => {
-                return (
-                  <label>
-                    <td>
-                    "{postDetail.artist_description}"
-                    </td>
-                    
-                  </label>
-                )
-              })}
+              <label>
+                <td>"{props.artistData.artist_description}"</td>
+              </label>
             </tr>
           </table>
         </Card.Body>
@@ -57,5 +35,3 @@ function Artist() {
     </div>
   )
 }
-
-export default Artist

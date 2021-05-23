@@ -14,12 +14,10 @@ const styles = {
     },
   };
 
-const qrcode = () => {
+  export default function QrCode(props) {
     return (
         <div style={styles.qrcode}>
-            <QRCode style={{ width: 100,height: 120, paddingLeft : 10}} value={JSON.stringify(data)} />
+            <QRCode style={{ width: 100,height: 120, paddingLeft : 10}} value={JSON.stringify(props.data)} />
         </div>
     )
 }
-
-export default qrcode
