@@ -1,7 +1,7 @@
 import React from 'react';
 import {Navbar} from 'react-bootstrap';
 
-const menu = () => {
+export default function menu() {
     return (
         <div>
             <Navbar bg="dark" variant="dark">
@@ -10,5 +10,3 @@ const menu = () => {
         </div>
     )
 }
-
-export default menu

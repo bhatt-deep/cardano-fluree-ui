@@ -1,15 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Image from 'react-bootstrap/Image';
 
 
-const image = () => {
+export default function ArtifactImage(props) {
     return (
         <div>
             <br></br>
             
-            <Image src="./img/sart.jpg" fluid style={{
+            <Image 
+                src = {props.imageData.imageUrl}
+                thumbnail
+                fluid style={{
                 border:"none",
-                marginLeft:"5%", 
+                marginLeft:"1%", 
                 height:'80%',
                 marginTop : "5%"
                 }} 
@@ -17,5 +20,3 @@ const image = () => {
         </div>
     )
 }
-
-export default image

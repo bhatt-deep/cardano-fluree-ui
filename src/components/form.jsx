@@ -4,7 +4,7 @@ import { Button, Col, Image } from 'react-bootstrap'
 import Axios from 'axios'
 import {Redirect, useHistory} from 'react-router-dom'
 
-function NFTForm() {
+export default function NFTForm() {
 
   const history = useHistory() 
   const url = 'http://localhost:3001/'
@@ -79,16 +79,22 @@ function NFTForm() {
     formData.append('date', newForm.date)
 
     console.log(`Passing request to : ${url}`)
-    let result = {
-      hash : '1qpuu9s2chx73ccyjfstd8y6lt57ws4hxjjmu6y9kuazdmef0xxsul3whnjle2wxr76vptwgxahnkl7ncddxx6fyqc8rstxk0hh'
-    }
-    await Axios.post(url, formData, {
-      headers: {'Content-Type': 'multipart/form-data'}
-    }).then((res) => {
-      console.log(res)
-      alert(`Data has been successfully stored.`)
-      history.push('./certificate', result)
-    })
+
+
+    // await Axios.post(url, formData, {
+    //   headers: {'Content-Type': 'multipart/form-data'}
+    // }).then((res) => {
+    //   console.log(res)
+    //   alert(`Data has been successfully stored.`)
+    //   history.push('./certificate', res.hash)
+    // })
+
+    // let result = {
+    //   hash : '1qpuu9s2chx73ccyjfstd8y6lt57ws4hxjjmu6y9kuazdmef0xxsul3whnjle2wxr76vptwgxahnkl7ncddxx6fyqc8rstxk0hh'
+    // }
+
+    // history.push('./certificate', result.hash)
+
 
   }
 
@@ -293,5 +299,3 @@ function NFTForm() {
     </div>
   )
 }
-
-export default NFTForm
