@@ -16,9 +16,12 @@ export default function Certificate(props) {
 
   const hash = props.location.state.hash;
   const apiUrl = `http://localhost:3001/${hash}`;
+  console.log(apiUrl);
 
   useEffect(() => {
-    axios.get(apiUrl).then((response) => {
+    axios.post(apiUrl, {
+        "pubKey" : "024bbf6389c3d879d19d4337b46d2aedac15c21a2c028e2b303ca02c26246f86b5"
+    }).then((response) => {
       const tokenData = response.data.result;
       setResponseData(tokenData)
 
