@@ -11,7 +11,8 @@ import Artist from '../components/artist'
 import Hash from '../components/hash'
 
 export default function Certificate(props) {
-  const hash = this.props.location.state;
+  const hashResult = props.location.state;
+  console.log(hashResult)
   const [responseData, setResponseData] = useState('');
   const apiUrl = 'http://localhost:3001/';
   useEffect(() => {
