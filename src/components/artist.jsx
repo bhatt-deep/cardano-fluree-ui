@@ -17,7 +17,7 @@ export default function Artist(props) {
 
             <tr>
               <label>
-                <td>"{props.artistData.artist_field}"</td>
+                <td>"{props.artistData.artistField}"</td>
               </label>
             </tr>
 
@@ -26,7 +26,7 @@ export default function Artist(props) {
 
             <tr>
               <label>
-                <td>"{props.artistData.artist_description}"</td>
+                <td>"{props.artistData.artistDescription}"</td>
               </label>
             </tr>
           </table>

@@ -22,7 +22,7 @@ export default function Hash(props) {
               <Row>
                 <label>
                   Issued On: <br />
-                  {props.hashData.date}
+                  {props.hashData.issuedOn}
                 </label>{' '}
                 <QRCode data={props.hashData}></QRCode>
               </Row>
