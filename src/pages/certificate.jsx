@@ -10,7 +10,8 @@ import Testart from '../components/testartCertificate'
 import Artist from '../components/artist'
 import Hash from '../components/hash'
 
-export default function Certificate() {
+export default function Certificate(props) {
+  const hash = this.props.location.state;
   const [responseData, setResponseData] = useState('');
   const apiUrl = 'http://localhost:3001/';
   useEffect(() => {

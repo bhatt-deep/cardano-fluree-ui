@@ -85,7 +85,7 @@ function NFTForm() {
     }).then((res) => {
       console.log(res)
       alert(`Data has been successfully stored.`)
-      history.push('./certificate')
+      history.push('./certificate', res.body.hash)
     })
 
   }
