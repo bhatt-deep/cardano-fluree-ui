@@ -81,7 +81,7 @@ function Hash(props)  {
                 {' '}
                 {' '}
 
-               <QRCode></QRCode>
+               <QRCode data={props.hashData}></QRCode>
 
             </Row>
           
