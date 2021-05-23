@@ -13,7 +13,7 @@ export default function Certificate(props) {
 
   const [responseData, setResponseData] = useState('');
 
-  const hash = props.location.state;
+  const hash = props.location.state.hash;
   const apiUrl = `http://localhost:3001/${hash}`;
 
   useEffect(() => {

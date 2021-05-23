@@ -11,11 +11,13 @@ export default function DigitalCertificate(props) {
         <Card.Body>
           <table>
             <tr>
-              <label>
+              
                 <td>
+                <label>
                   <b>"{props.testArtData.name}"</b>
+                  </label>
                 </td>
-              </label>
+              
             </tr>
 
             <br></br>

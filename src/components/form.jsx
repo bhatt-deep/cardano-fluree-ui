@@ -80,19 +80,19 @@ export default function NFTForm() {
 
     console.log(`Passing request to : ${url}`)
 
-    await Axios.post(url, formData, {
-      headers: {'Content-Type': 'multipart/form-data'}
-    }).then((res) => {
-      console.log(res)
-      alert(`Data has been successfully stored.`)
-      history.push('./certificate', res)
-    })
+    // await Axios.post(url, formData, {
+    //   headers: {'Content-Type': 'multipart/form-data'}
+    // }).then((res) => {
+    //   console.log(res)
+    //   alert(`Data has been successfully stored.`)
+    //   history.push('./certificate', res.hash)
+    // })
 
     // let result = {
     //   hash : '1qpuu9s2chx73ccyjfstd8y6lt57ws4hxjjmu6y9kuazdmef0xxsul3whnjle2wxr76vptwgxahnkl7ncddxx6fyqc8rstxk0hh'
     // }
 
-    // history.push('./certificate', result)
+    // history.push('./certificate', result.hash)
 
   }
 
