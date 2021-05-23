@@ -5,6 +5,7 @@ import { Row, Col } from 'react-bootstrap'
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import Menu from './components/menu'
 import NFTForm from './components/form'
+import Table from './components/txnhash'
 
 import Certificate from './pages/certificate'
 
@@ -20,7 +21,9 @@ function App() {
           </Col>
         </Row>
       </div>
-
+      <Switch>
+        <Route path='/hash' exact component={Table}/>
+      </Switch>
       <Switch>
         <Route path='/certificate' exact component={Certificate}/>
       </Switch>

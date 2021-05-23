@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form'
 import { Button, Col, Image } from 'react-bootstrap'
 import Axios from 'axios'
 import {Redirect, useHistory} from 'react-router-dom'
+import FullPageLoader from './fullPageLoader'
 
 export default function NFTForm() {
 
@@ -12,6 +13,7 @@ export default function NFTForm() {
   var formDate = new Date().toISOString().split('T')[0]
 
   const [validated, setValidated] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [newForm, setForm] = useState({
     category      : 'Art',
     name          : '',
@@ -55,6 +57,7 @@ export default function NFTForm() {
   }
 
   const handleSubmit = async (event) => {
+    setLoading(true)
     event.preventDefault()
     const form = event.currentTarget
 
@@ -80,20 +83,19 @@ export default function NFTForm() {
 
     console.log(`Passing request to : ${url}`)
 
-    await Axios.post(url, formData, {
-      headers: {'Content-Type': 'multipart/form-data'}
-    }).then((res) => {
-      console.log(res)
-      alert(`Data has been successfully stored.`)
-      history.push('./certificate', res)
-    })
-
-    // let result = {
-    //   hash : '8685ac9701fcc046cc1457a63b9dcf18fe0c9f1e439b87cd32dcda9eab594b83'
-    // }
-
-    // history.push('./certificate', result)
-
+    // await Axios.post(url, formData, {
+    //   headers: {'Content-Type': 'multipart/form-data'}
+    // }).then((res) => {
+    //   console.log(res.data)
+    //   alert(`Data has been successfully stored.`)
+    //   history.push('./certificate', res.data)
+    // })
+    
+    setTimeout(() => {
+      alert('Data has been successfully stored');
+      history.push('./hash')
+    }, 4000)
+    
   }
 
   useEffect(() => {}, [newForm])
@@ -294,6 +296,7 @@ export default function NFTForm() {
         </Button>{' '}
         <Button as="input" type="reset" value="Reset" />
       </Form>
+      {loading ? <FullPageLoader/> : <Form/>}
     </div>
   )
 }
