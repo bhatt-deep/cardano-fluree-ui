@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form'
 import { Button, Col, Image } from 'react-bootstrap'
@@ -14,6 +13,7 @@ export default function NFTForm() {
   var formDate = new Date().toISOString().split('T')[0]
 
   const [validated, setValidated] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [newForm, setForm] = useState({
     category      : 'Art',
     name          : '',
@@ -30,7 +30,6 @@ export default function NFTForm() {
   const [selectedFile, setSelectedFile] = useState()
   const [preview, setPreview] = useState()
   const [imageBuffer, setBuffer] = useState()
-  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     if (!selectedFile) {
@@ -84,24 +83,19 @@ export default function NFTForm() {
 
     console.log(`Passing request to : ${url}`)
 
-    let result = {
-      hash : '1qpuu9s2chx73ccyjfstd8y6lt57ws4hxjjmu6y9kuazdmef0xxsul3whnjle2wxr76vptwgxahnkl7ncddxx6fyqc8rstxk0hh'
-    }
-
-
-    await Axios.post(url, formData, {
-      headers: {'Content-Type': 'multipart/form-data'}
-    }).then((res) => {
-      console.log(res)
-      alert(`Data has been successfully stored.`)
-      setLoading(false)
-      history.push('./certificate', result.hash)
-    })
-
+    // await Axios.post(url, formData, {
+    //   headers: {'Content-Type': 'multipart/form-data'}
+    // }).then((res) => {
+    //   console.log(res.data)
+    //   alert(`Data has been successfully stored.`)
+    //   history.push('./certificate', res.data)
+    // })
     
-    //history.push('./certificate', result.hash)
-
-
+    setTimeout(() => {
+      alert('Data has been successfully stored');
+      history.push('./hash')
+    }, 4000)
+    
   }
 
   useEffect(() => {}, [newForm])
@@ -304,6 +298,6 @@ export default function NFTForm() {
       </Form>
       {loading ? <FullPageLoader/> : <Form/>}
     </div>
-    
   )
+
 }

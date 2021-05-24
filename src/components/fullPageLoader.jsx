@@ -1,6 +1,6 @@
 import React from 'react'
 
-const fullPageLoader = () => {
+export default function fullPageLoader(){
     return (
         <div className="fp-container">
             <img src="./spinner.gif" className="fp-loader" alt="loading" />
@@ -8,4 +8,3 @@ const fullPageLoader = () => {
     )
 }
 
-export default fullPageLoader
