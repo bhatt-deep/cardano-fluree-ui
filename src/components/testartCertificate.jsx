@@ -1,56 +1,50 @@
-import React from 'react';
+import React from 'react'
 import Card from 'react-bootstrap/Card'
 
-function NFTForm(props) {
-  //console.log(props.testArtData)
+
+export default function DigitalCertificate(props) {
   return (
     <div>
-
       <br></br>
       <h2>Digital Certificate of Authenticity</h2>
+
 
       <Card bg="dark">
         <Card.Body>
           <table>
             <tr>
 
-              <label>
-
+              
                 <td>
-                  <b>
-                    "{props.testArtData.name}"
-                        </b>
+                <label>
+                  <b>"{props.testArtData.name}"</b>
+                  </label>
                 </td>
-              </label>
+              
 
             </tr>
 
             <br></br>
-            <br></br>
+           
             <tr>
 
               <label>
                 <td>
-                  <p>Materials :   </p>
+                  <p>Materials : </p>
                 </td>
 
                 <td>
-                  <p>   {props.testArtData.materials}</p>
-
+                  <p> {props.testArtData.materials}</p>
                 </td>
               </label>
-
             </tr>
 
-            <br></br>
+            
 
             <tr>
-
               <label>
                 <td>Dimentions:</td>
-                <td> {props.testArtData.dimensions}
-                </td>
-
+                <td> {props.testArtData.dimensions}</td>
               </label>
 
             </tr>
@@ -61,9 +55,7 @@ function NFTForm(props) {
 
               <label>
                 <td>Weight:</td>
-                <td> {props.testArtData.weight}
-                </td>
-
+                <td> {props.testArtData.weight}</td>
               </label>
 
             </tr>
@@ -74,9 +66,7 @@ function NFTForm(props) {
 
               <label>
                 <td>Story Behind Art:</td>
-                <td> {props.testArtData.story}
-                </td>
-
+                <td> {props.testArtData.story}</td>
               </label>
 
             </tr>
@@ -87,9 +77,7 @@ function NFTForm(props) {
 
               <label>
                 <td>Cultural Significance:</td>
-                <td> {props.testArtData.significance}
-                </td>
-
+                <td> {props.testArtData.significance}</td>
               </label>
 
             </tr>
@@ -100,9 +88,7 @@ function NFTForm(props) {
 
               <label>
                 <td>Availability:</td>
-                <td> {props.testArtData.availability}
-                </td>
-
+                <td> {props.testArtData.availability}</td>
               </label>
 
             </tr>
@@ -113,18 +99,15 @@ function NFTForm(props) {
 
               <label>
                 <td>Date Created:</td>
-                <td> {props.testArtData.date}
-                </td>
-
+                <td> {props.testArtData.date}</td>
               </label>
 
             </tr>
-
           </table>
         </Card.Body>
       </Card>
     </div>
   )
+
 }
 
-export default NFTForm

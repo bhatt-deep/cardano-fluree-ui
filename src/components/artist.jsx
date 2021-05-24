@@ -1,8 +1,8 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card'
 
-function Artist(props) {
-  //console.log(props.artistData)
+export default function Artist(props) {
+
   return (
     <div>
       <Card bg="dark">
@@ -10,26 +10,16 @@ function Artist(props) {
           <table>
             <tr>
 
-
               <label>
-
                 <td>
-                  <b>
-                    {props.artistData.artist}
-                  </b>
+                  <b>{props.artistData.artist}</b>
                 </td>
               </label>
-
-
             </tr>
 
             <tr>
-
               <label>
-
-                <td>
-                  "{props.artistData.artist_field}"
-                         </td>
+                <td>"{props.artistData.artistField}"</td>
               </label>
 
             </tr>
@@ -40,10 +30,7 @@ function Artist(props) {
             <tr>
 
               <label>
-                <td>
-                  "{props.artistData.artist_Description}"
-                    </td>
-
+                <td>"{props.artistData.artistDescription}"</td>
               </label>
 
             </tr>
@@ -53,5 +40,3 @@ function Artist(props) {
     </div>
   )
 }
-
-export default Artist
