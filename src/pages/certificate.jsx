@@ -11,6 +11,7 @@ import Hash from '../components/hash'
 
 export default function Certificate(props) {
 
+
   const [responseData, setResponseData] = useState('');
 
   const hash = props.location.state.hash;
@@ -24,14 +25,14 @@ export default function Certificate(props) {
     }).then((response) => {
       const tokenData = response.data.result;
       setResponseData(tokenData)
+
     }).catch((error) => {
       console.log(error)
     })
   }, [])
 
-    return (
+  return (
         <div class="App">
-         
           <Row>
             <Col>
               <ArtifactImage imageData = {responseData}/>
@@ -39,8 +40,10 @@ export default function Certificate(props) {
               <Hash hashData={responseData} />
             </Col>
             <Col>
+
               <DigitalCertificate testArtData={responseData}/>
               <Artist artistData={responseData} />
+
             </Col>
             </Row>
         </div>

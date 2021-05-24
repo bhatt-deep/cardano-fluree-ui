@@ -299,4 +299,5 @@ export default function NFTForm() {
       {loading ? <FullPageLoader/> : <Form/>}
     </div>
   )
+
 }

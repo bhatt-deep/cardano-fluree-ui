@@ -10,6 +10,9 @@ import Explorer from './components/explorer'
 
 import Certificate from './pages/certificate'
 
+
+
+
 function App() {
   return (
     <Router>
@@ -25,6 +28,7 @@ function App() {
       <Switch>
         <Route path='/hash' exact component={Table}/>
       </Switch>
+
       <Switch>
         <Route path='/certificate' exact component={Certificate}/>
       </Switch>
@@ -34,6 +38,7 @@ function App() {
       </Switch>
       
     </Router>
+
   )
 }
 
