@@ -9,7 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Card from 'react-bootstrap/Card'
 import data from '../data/data.json'
-import {Link} from 'react-router-dom'
+import {Link, NavLink} from 'react-router-dom'
 
 const useStyles = makeStyles({
   table: {
@@ -42,6 +42,11 @@ export default function BasicTable() {
                 <Link to="./certificate">
                 {postDetail.txhHash}
                 </Link>
+
+            {/* <Link to={{pathname : "./certificate", state : {hash : 1234}}}>
+                {postDetail.txhHash}
+                </Link> */}
+
               </TableCell>
               <TableCell align="right">{postDetail.artist}</TableCell>
               <TableCell align="right">{postDetail.name}</TableCell>

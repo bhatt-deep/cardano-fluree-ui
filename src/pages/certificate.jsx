@@ -14,6 +14,7 @@ export default function Certificate(props) {
   const [responseData, setResponseData] = useState('');
 
   const hash = props.location.state.hash;
+  console.log(hash)
   const apiUrl = `http://localhost:3001/${hash}`;
   console.log(apiUrl);
 
